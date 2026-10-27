@@ -19,9 +19,27 @@ function mostrarPresupuesto() {
     return `Tu presupuesto actual es de ${presupuesto} €`;
 }
 
-function CrearGasto() {
-    // TODO
-}
+function CrearGasto(descripcion, valor) {
+    this.descripcion = descripcion;
+
+    if (typeof valor !== "number" || !(valor >= 0)) {
+        this.valor = 0;
+    } else {
+        
+        this.valor = valor;
+    }
+    this.mostrarGasto = function() {
+        return `Gasto correspondiente a ${this.descripcion} con valor ${this.valor} €`;
+    }
+    this.actualizarDescripcion = function(nuevaDescripcion) {
+        this.descripcion = nuevaDescripcion;
+    }
+    this.actualizarValor = function(nuevoValor) {
+    if (typeof nuevoValor === "number" && nuevoValor >= 0) {
+        this.valor = nuevoValor;
+    }
+    }
+};
 
 function listarGastos() {}
 function anyadirGasto() {}
