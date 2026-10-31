@@ -90,7 +90,13 @@ function anyadirGasto(gasto) {
     idGasto++;
     gastos.push(gasto);
 }
-function borrarGasto() {}
+function borrarGasto(id) {
+    const index = gastos.findIndex(gasto => gasto.id === id);
+
+    if (index !== -1) {
+        gastos.splice(index, 1);
+    }
+}
 function calcularTotalGastos() {}
 function calcularBalance() {}
 
