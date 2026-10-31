@@ -53,6 +53,14 @@ function CrearGasto(descripcion, valor, fecha, ...etiquetas) {
             }
         }
     };
+        this.borrarEtiquetas = function(...etiquetasParaBorrar) {
+        for (const etiqueta of etiquetasParaBorrar) {
+        const index = this.etiquetas.indexOf(etiqueta);
+            if (index !== -1) {
+                this.etiquetas.splice(index, 1);
+            }
+        }
+    };
 }
 
 function listarGastos() {}
