@@ -97,7 +97,15 @@ function borrarGasto(id) {
         gastos.splice(index, 1);
     }
 }
-function calcularTotalGastos() {}
+function calcularTotalGastos() {
+    let totalGastos = 0;
+
+    for (const gasto of gastos) {
+        totalGastos += gasto.valor;
+    }
+
+    return totalGastos;
+}
 function calcularBalance() {}
 
 // NO MODIFICAR A PARTIR DE AQUÍ: exportación de funciones y objetos creados para poder ejecutar los tests.
