@@ -221,7 +221,7 @@ function agruparGastos(periodo = "mes", etiquetas = [], fechaDesde, fechaHasta) 
     const gastosFiltrados = filtrarGastos(filtros);
 
     return gastosFiltrados.reduce((acc, gasto) => {
-        
+
     const clavePeriodo = gasto.obtenerPeriodoAgrupacion(periodo);
 
     if (acc[clavePeriodo] === undefined) {
@@ -249,5 +249,5 @@ export   {
     calcularTotalGastos,
     calcularBalance,
     filtrarGastos,
-    agruparGastos,
+    agruparGastos
 }
