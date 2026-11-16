@@ -110,6 +110,63 @@ function calcularBalance() {
     return presupuesto - calcularTotalGastos();
 }
 
+function filtrarGastos(filtros){
+    let gastosFiltrados = gastos;
+
+    if (filtros.fechaDesde) {
+        const fechaMinima = Date.parse(filtros.fechaDesde);
+
+        gastosFiltrados = gastosFiltrados.filter(gasto => gasto.fecha >= fechaMinima);
+    }
+
+
+    if (filtros.fechaHasta) {
+        const fechaMaxima = Date.parse(filtros.fechaHasta);
+
+        gastosFiltrados = gastosFiltrados.filter(gasto => gasto.fecha <= fechaMaxima);
+    }
+
+    
+    if(filtros.valorMinimo !== undefined) {
+        gastosFiltrados = gastosFiltrados.filter(gasto => gasto.valor >= filtros.valorMinimo);
+    }
+
+
+   if(filtros.valorMaximo !== undefined) {
+        gastosFiltrados = gastosFiltrados.filter(gasto => gasto.valor <= filtros.valorMaximo);
+    }
+
+
+   if (filtros.descripcionContiene) {
+    const textoBuscado = filtros.descripcionContiene.toLowerCase();
+
+    gastosFiltrados = gastosFiltrados.filter(gasto => gasto.descripcion.toLowerCase().includes(textoBuscado)
+        
+    );
+}
+
+    if(filtros.etiquetasTiene) {
+    
+        const etiquetasBuscadas = filtros.etiquetasTiene.map(etiqueta => etiqueta.toLowerCase());
+
+        gastosFiltrados = gastosFiltrados.filter(gasto => gasto.etiquetas.some(etiqueta => etiquetasBuscadas.includes(etiqueta.toLowerCase())));
+     
+    }
+
+
+
+
+
+    return gastosFiltrados;
+}
+
+function agruparGastos(){
+
+}
+
+
+
+
 // NO MODIFICAR A PARTIR DE AQUÍ: exportación de funciones y objetos creados para poder ejecutar los tests.
 // Las funciones y objetos deben tener los nombres que se indican en el enunciado
 // Si al obtener el código de una práctica se genera un conflicto, por favor incluye todo el código que aparece aquí debajo
@@ -121,5 +178,7 @@ export   {
     anyadirGasto,
     borrarGasto,
     calcularTotalGastos,
-    calcularBalance
+    calcularBalance,
+    filtrarGastos,
+    agruparGastos,
 }
