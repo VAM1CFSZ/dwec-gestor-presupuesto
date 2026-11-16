@@ -80,6 +80,34 @@ Etiquetas:
 ${etiquetasFormateadas}
 `;
     };
+
+       this.obtenerPeriodoAgrupacion = function(periodo) {
+       const fecha = new Date(this.fecha);
+       const anyo = fecha.getFullYear();
+
+       let mes = fecha.getMonth() + 1;
+       let dia = fecha.getDate();
+
+        if (mes < 10) {
+        mes = "0" + mes;
+        }
+
+         if (dia < 10) {
+         dia = "0" + dia;
+        }
+
+         if (periodo === "dia") {
+         return `${anyo}-${mes}-${dia}`;
+        }
+
+        if (periodo === "mes") {
+        return `${anyo}-${mes}`;
+         }
+
+        if (periodo === "anyo") {
+        return `${anyo}`;
+        }
+    };
 }
 
 function listarGastos() {
