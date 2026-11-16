@@ -188,8 +188,49 @@ function filtrarGastos(filtros){
     return gastosFiltrados;
 }
 
-function agruparGastos(){
+function agruparGastos(periodo = "mes", etiquetas = [], fechaDesde, fechaHasta) {
+    if (!fechaHasta) {
+        const hoy = new Date();
+        const anyo = hoy.getFullYear();
+        let mes = hoy.getMonth() + 1;
+        let dia = hoy.getDate();
 
+        if (mes < 10) {
+            mes = "0" + mes;
+        }
+
+        if (dia < 10) {
+            dia = "0" + dia;
+        }
+
+        fechaHasta = `${anyo}-${mes}-${dia}`;
+    }
+
+    const filtros = {
+        fechaHasta: fechaHasta
+    };
+
+    if (fechaDesde) {
+        filtros.fechaDesde = fechaDesde;
+    }
+
+    if (etiquetas.length > 0) {
+        filtros.etiquetasTiene = etiquetas;
+    }
+
+    const gastosFiltrados = filtrarGastos(filtros);
+
+    return gastosFiltrados.reduce((acc, gasto) => {
+        
+    const clavePeriodo = gasto.obtenerPeriodoAgrupacion(periodo);
+
+    if (acc[clavePeriodo] === undefined) {
+        acc[clavePeriodo] = 0;
+    }
+
+    acc[clavePeriodo] += gasto.valor;
+    return acc;
+   },{});
 }
 
 
