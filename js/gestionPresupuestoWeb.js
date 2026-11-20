@@ -239,7 +239,11 @@ function mostrarGastosAgrupadosWeb(idElemento, agrup, periodo) {
 
 
 export {
-    mostrarDatoEnId,
-    mostrarGastoWeb,
-    mostrarGastosAgrupadosWeb
+    repintar,
+    actualizarPresupuestoWeb,
+    nuevoGastoWeb,
+    EditarHandle,
+    BorrarHandle,
+    BorrarEtiquetasHandle,
+    mostrarGastoWeb
 };
