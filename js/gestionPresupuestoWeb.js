@@ -1,3 +1,13 @@
+import * as GestionPresupuesto from "./gestionPresupuesto.js";
+function repintar() {
+    mostrarDatoEnId("presupuesto", GestionPresupuesto.mostrarPresupuesto());
+    mostrarDatoEnId("gastos-totales", GestionPresupuesto.calcularTotalGastos());
+    mostrarDatoEnId("balance-total", GestionPresupuesto.calcularBalance());
+
+    mostrarDatoEnId("listado-gastos-completos", "");
+    mostrarGastoWeb("listado-gastos-completos", GestionPresupuesto.listarGastos());
+}
+
 function mostrarDatoEnId(idElemento,valor) {
 
     const elemento = document.querySelector(`#${idElemento}`);
