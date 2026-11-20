@@ -119,6 +119,21 @@ const borrarHandle = new BorrarHandle();
 borrarHandle.gasto = gasto;
 botonBorrar.addEventListener("click", borrarHandle);
 
+
+function BorrarEtiquetasHandle() {
+}
+
+BorrarEtiquetasHandle.prototype.handleEvent = function () {
+    this.gasto.borrarEtiquetas(this.etiqueta);
+    repintar();
+};
+
+const borrarEtiquetasHandle = new BorrarEtiquetasHandle();
+borrarEtiquetasHandle.gasto = gasto;
+borrarEtiquetasHandle.etiqueta = etiqueta;
+botonBorrarEtiqueta.addEventListener("click", borrarEtiquetasHandle);
+
+
 function mostrarGastoWeb(idElemento, gasto) {
     const elemento = document.querySelector(`#${idElemento}`);
 
