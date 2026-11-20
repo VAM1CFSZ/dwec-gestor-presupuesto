@@ -8,6 +8,54 @@ function repintar() {
     mostrarGastoWeb("listado-gastos-completos", GestionPresupuesto.listarGastos());
 }
 
+function actualizarPresupuestoWeb(){
+
+    const entrada = prompt("Introduce el nuevo presupuesto:");
+
+    
+    if (entrada === null || entrada.trim() === "") {
+        return;
+    }
+
+    const nuevoPresupuesto = Number(entrada);
+
+    if (Number.isNaN(nuevoPresupuesto)) {
+        alert("Introduce un presupuesto numérico.");
+        return;
+    }
+
+    GestionPresupuesto.actualizarPresupuesto(nuevoPresupuesto);
+    repintar();
+}
+const botonActualizarPresupuesto =
+    document.getElementById("actualizarpresupuesto");
+
+botonActualizarPresupuesto.addEventListener(
+    "click",
+    actualizarPresupuestoWeb()
+);
+
+function nuevoGastoWeb() {
+    const descripcion = prompt("Introduce la descripción del gasto:");
+    const valor = Number(prompt("Introduce el valor del gasto:"));
+    const fecha = prompt("Introduce la fecha (yyyy-mm-dd):");
+    const etiquetasTexto = prompt("Introduce las etiquetas separadas por comas:");
+
+    const etiquetas = etiquetasTexto.split(",");
+
+    const gasto = GestionPresupuesto.crearGasto({
+        descripcion: descripcion,
+        valor: valor,
+        fecha: fecha,
+        etiquetas: etiquetas
+    });
+
+    GestionPresupuesto.anyadirGasto(gasto);
+    repintar();
+}
+const botonAnyadirGasto = document.getElementById("anyadirgasto");
+botonAnyadirGasto.addEventListener("click", nuevoGastoWeb);
+
 function mostrarDatoEnId(idElemento,valor) {
 
     const elemento = document.querySelector(`#${idElemento}`);
@@ -16,6 +64,44 @@ function mostrarDatoEnId(idElemento,valor) {
 
 }
 
+function EditarHandle() {
+}
+
+EditarHandle.prototype.handleEvent = function () {
+    const descripcion = prompt(
+        "Descripción del gasto:",
+        this.gasto.descripcion
+    );
+    if (descripcion === null) return;
+
+    const valorTexto = prompt(
+        "Valor del gasto:",
+        this.gasto.valor
+    );
+    if (valorTexto === null) return;
+
+    const fecha = prompt(
+        "Fecha (yyyy-mm-dd):",
+        this.gasto.fecha
+    );
+    if (fecha === null) return;
+
+    const etiquetasTexto = prompt(
+        "Etiquetas separadas por comas:",
+        this.gasto.etiquetas.join(",")
+    );
+    if (etiquetasTexto === null) return;
+
+    const valor = Number(valorTexto);
+    const etiquetas = etiquetasTexto.split(",");
+
+    GestionPresupuesto.actualizarDescripcion(this.gasto, descripcion);
+    GestionPresupuesto.actualizarValor(this.gasto, valor);
+    GestionPresupuesto.actualizarFecha(this.gasto, fecha);
+    GestionPresupuesto.anyadirEtiquetas(this.gasto, etiquetas);
+
+    repintar();
+};
 function mostrarGastoWeb(idElemento, gasto) {
     const elemento = document.querySelector(`#${idElemento}`);
 
