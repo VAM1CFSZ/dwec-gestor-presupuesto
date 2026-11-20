@@ -102,6 +102,23 @@ EditarHandle.prototype.handleEvent = function () {
 
     repintar();
 };
+
+const editarHandle = new EditarHandle();
+editarHandle.gasto = gasto;
+botonEditar.addEventListener("click", editarHandle);
+
+function BorrarHandle() {
+}
+
+BorrarHandle.prototype.handleEvent = function () {
+    GestionPresupuesto.borrarGasto(this.gasto.id);
+    repintar();
+};
+
+const borrarHandle = new BorrarHandle();
+borrarHandle.gasto = gasto;
+botonBorrar.addEventListener("click", borrarHandle);
+
 function mostrarGastoWeb(idElemento, gasto) {
     const elemento = document.querySelector(`#${idElemento}`);
 
